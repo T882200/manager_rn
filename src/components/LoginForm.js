@@ -2,9 +2,16 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Card, CardSection, Input, Button } from './common';
+import { connect } from 'react-redux';
+import { emailChanged } from '../actions/index';
 
 // create a component
 class LoginForm extends Component {
+  
+  onEmailChange(text){
+    this.props.emailChanged
+  }
+
   render() {
     return (
       <Card>
@@ -12,8 +19,10 @@ class LoginForm extends Component {
           <Input
             label="Email"
             placeholder="email@gmail.com"
+            onChangeText={this.onEmailChange.bind(this)}
           />
         </CardSection>
+        
         <CardSection>
           <Input
               secureTextEntry
@@ -21,6 +30,7 @@ class LoginForm extends Component {
               placeholder="password"
           />
         </CardSection>
+        
         <CardSection>
           <Button>
             Login
@@ -42,4 +52,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default LoginForm;
+export default connect(null, { emailChanged })(LoginForm);
